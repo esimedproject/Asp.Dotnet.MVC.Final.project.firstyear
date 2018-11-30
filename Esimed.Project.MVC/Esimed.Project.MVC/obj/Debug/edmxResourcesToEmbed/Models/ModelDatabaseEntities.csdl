@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database.Projet.DotnetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TableDate">
+    <Key>
+      <PropertyRef Name="DateId" />
+    </Key>
+    <Property Name="DateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Datedebout" Type="DateTime" Precision="3" />
+    <Property Name="DateFin" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TableTache" Relationship="Self.FK_TableTache_TableDate" FromRole="TableDate" ToRole="TableTache" />
+  </EntityType>
+  <EntityType Name="TableExigence">
+    <Key>
+      <PropertyRef Name="ExigenceId" />
+    </Key>
+    <Property Name="ExigenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExigenceCommentaire" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ExigenceFonctionnel" Type="Boolean" Nullable="false" />
+    <Property Name="ExigenceFonctionTache" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="TableTache" Relationship="Self.FK_TableTache_TableExigence" FromRole="TableExigence" ToRole="TableTache" />
+  </EntityType>
+  <EntityType Name="TableJalon">
+    <Key>
+      <PropertyRef Name="JalonId" />
+    </Key>
+    <Property Name="JalonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JalonAvancement" Type="Int32" />
+    <Property Name="JalonTaches" Type="Int32" />
+    <Property Name="JalonNom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TableTache" Relationship="Self.FK_tableJalon_TableTache" FromRole="TableJalon" ToRole="TableTache" />
+    <NavigationProperty Name="TableProjet" Relationship="Self.FK_TableProjet_tableJalon" FromRole="TableJalon" ToRole="TableProjet" />
+  </EntityType>
+  <EntityType Name="TableProjet">
+    <Key>
+      <PropertyRef Name="ProjetId" />
+    </Key>
+    <Property Name="ProjetId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProjetAvancement" Type="Int32" />
+    <Property Name="ProjetJalon" Type="Int32" />
+    <NavigationProperty Name="TableJalon" Relationship="Self.FK_TableProjet_tableJalon" FromRole="TableProjet" ToRole="TableJalon" />
+  </EntityType>
+  <EntityType Name="TableTache">
+    <Key>
+      <PropertyRef Name="TacheId" />
+    </Key>
+    <Property Name="TacheId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TacheNom" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TacheUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TacheTrigramme" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TacheDate" Type="Int32" />
+    <Property Name="TacheExigence" Type="Int32" />
+    <NavigationProperty Name="TableDate" Relationship="Self.FK_TableTache_TableDate" FromRole="TableTache" ToRole="TableDate" />
+    <NavigationProperty Name="TableExigence" Relationship="Self.FK_TableTache_TableExigence" FromRole="TableTache" ToRole="TableExigence" />
+    <NavigationProperty Name="TableJalon" Relationship="Self.FK_tableJalon_TableTache" FromRole="TableTache" ToRole="TableJalon" />
+  </EntityType>
+  <Association Name="FK_TableTache_TableDate">
+    <End Role="TableDate" Type="Self.TableDate" Multiplicity="0..1" />
+    <End Role="TableTache" Type="Self.TableTache" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TableDate">
+        <PropertyRef Name="DateId" />
+      </Principal>
+      <Dependent Role="TableTache">
+        <PropertyRef Name="TacheDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TableTache_TableExigence">
+    <End Role="TableExigence" Type="Self.TableExigence" Multiplicity="0..1" />
+    <End Role="TableTache" Type="Self.TableTache" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TableExigence">
+        <PropertyRef Name="ExigenceId" />
+      </Principal>
+      <Dependent Role="TableTache">
+        <PropertyRef Name="TacheExigence" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tableJalon_TableTache">
+    <End Role="TableTache" Type="Self.TableTache" Multiplicity="0..1" />
+    <End Role="TableJalon" Type="Self.TableJalon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TableTache">
+        <PropertyRef Name="TacheId" />
+      </Principal>
+      <Dependent Role="TableJalon">
+        <PropertyRef Name="JalonTaches" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TableProjet_tableJalon">
+    <End Role="TableJalon" Type="Self.TableJalon" Multiplicity="0..1" />
+    <End Role="TableProjet" Type="Self.TableProjet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TableJalon">
+        <PropertyRef Name="JalonId" />
+      </Principal>
+      <Dependent Role="TableProjet">
+        <PropertyRef Name="ProjetJalon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MVCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TableDate" EntityType="Self.TableDate" />
+    <EntitySet Name="TableExigence" EntityType="Self.TableExigence" />
+    <EntitySet Name="TableJalon" EntityType="Self.TableJalon" />
+    <EntitySet Name="TableProjet" EntityType="Self.TableProjet" />
+    <EntitySet Name="TableTache" EntityType="Self.TableTache" />
+    <AssociationSet Name="FK_TableTache_TableDate" Association="Self.FK_TableTache_TableDate">
+      <End Role="TableDate" EntitySet="TableDate" />
+      <End Role="TableTache" EntitySet="TableTache" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TableTache_TableExigence" Association="Self.FK_TableTache_TableExigence">
+      <End Role="TableExigence" EntitySet="TableExigence" />
+      <End Role="TableTache" EntitySet="TableTache" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tableJalon_TableTache" Association="Self.FK_tableJalon_TableTache">
+      <End Role="TableTache" EntitySet="TableTache" />
+      <End Role="TableJalon" EntitySet="TableJalon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TableProjet_tableJalon" Association="Self.FK_TableProjet_tableJalon">
+      <End Role="TableJalon" EntitySet="TableJalon" />
+      <End Role="TableProjet" EntitySet="TableProjet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
