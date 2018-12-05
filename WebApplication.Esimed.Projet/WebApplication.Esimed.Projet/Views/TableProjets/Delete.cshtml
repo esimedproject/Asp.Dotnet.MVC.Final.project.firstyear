@@ -1,0 +1,48 @@
+﻿@model WebApplication.Esimed.Projet.Service.TableProjet
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>supprimer</h2>
+
+<h3>êtes  vous certain de vouloir supprimer votre Projet?</h3>
+<div>
+    <h4>TableProjet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Projet :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjetNom)
+        </dd>
+
+        <dt>
+            Avancement :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjetAvancement) %
+        </dd>
+
+        <dt>
+            Propriétaire :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TableTrigramme.TrigrammeNom)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste", "Index")
+        </div>
+    }
+</div>

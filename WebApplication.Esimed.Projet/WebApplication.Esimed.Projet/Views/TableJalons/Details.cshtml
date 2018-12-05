@@ -1,0 +1,50 @@
+﻿@model WebApplication.Esimed.Projet.Service.TableJalon
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Détails du Jalon</h2>
+
+<div>
+    <h4>Table des Jalons</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Avancement :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JalonAvancement)
+        </dd>
+
+        <dt>
+            Date de Début :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JalonDateDebut)
+        </dd>
+
+        <dt>
+            Date de Fin :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JalonDateFin)
+        </dd>
+
+        <dt>
+            Nom du Jalon :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JalonNom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.JalonId }) |
+    @Html.ActionLink("Retour à la liste", "Index")
+</p>

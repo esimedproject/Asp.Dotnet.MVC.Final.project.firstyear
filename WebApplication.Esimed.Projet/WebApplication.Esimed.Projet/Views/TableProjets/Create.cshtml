@@ -1,0 +1,47 @@
+﻿@model WebApplication.Esimed.Projet.Service.TableProjet
+
+@{
+    ViewBag.Title = "Create";
+}
+
+    <h2>Creation d'un projet</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Table Projet</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="control-label col-md-2">
+                    Projet :
+                </div>
+              
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProjetNom, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProjetNom, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2">
+                    Propriétaire :
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TableTrigramme.TrigrammeNom, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TableTrigramme.TrigrammeNom, "", new { @class = "text-danger" })                    
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Créer" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Retour à la liste", "Index")
+    </div>

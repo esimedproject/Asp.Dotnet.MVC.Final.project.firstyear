@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebApplication.Esimed.Projet.Service.TableJalon>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Table des Jalons</h4>
+
+<button class="btn btn-default">
+    @Html.ActionLink("Créer un Jalon", "Create", new { idprojet = ViewBag.idprojet })
+</button>
+<table class="table">
+    <tr>
+        <th>
+            jalon
+        </th>
+        <th>
+            Avancement
+        </th>
+        <th>
+            Date de Début
+        </th>
+        <th>
+            Date de Fin
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JalonNom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JalonAvancement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JalonDateDebut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JalonDateFin)
+            </td>
+            <td>
+                @Html.ActionLink("Modifier", "Edit", new { id = item.JalonId }) |
+                @Html.ActionLink("Détails", "Details", new { id = item.JalonId }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.JalonId }) |
+                @Html.ActionLink("Sélectionner", "Select", new { id = item.JalonId })
+            </td>
+        </tr>
+    }
+
+</table>

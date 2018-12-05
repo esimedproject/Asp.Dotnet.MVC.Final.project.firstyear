@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebApplication.Esimed.Projet.Service.TableTache>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Liste des tâches</h2>
+
+<button class="btn btn-default">
+    @Html.ActionLink("Créer un nouveau", "Create", new { idtaches = ViewBag.idtaches })
+</button>
+<table class="table">
+    <tr>
+        <th>
+            Tâche
+        </th>
+   
+        <th>
+            Nombre de jours
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TacheNom)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.TacheNbDeJours) Jours
+        </td>
+     
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id = item.TacheId }) |
+            @Html.ActionLink("Détails", "Details", new { id = item.TacheId }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.TacheId }) |
+            @Html.ActionLink("Ouvrir", "Open", new { id = item.TacheId })
+        </td>
+    </tr>
+}
+
+</table>

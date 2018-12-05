@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebApplication.Esimed.Projet.Service.TableProjet>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Liste des projets</h2>
+
+<button class="btn btn-default">
+    @Html.ActionLink("Créer un projet", "Create")
+</button>
+<table class="table">
+    <tr>
+        <th>
+            Projet
+        </th>
+        <th>
+            Avancement
+        </th>
+        <th>
+            Propriétaire
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjetNom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjetAvancement) %
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TableTrigramme.TrigrammeNom)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id = item.ProjetId }) |
+            @Html.ActionLink("Détails", "Details", new { id = item.ProjetId }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.ProjetId }) |
+            @Html.ActionLink("Sélectionner", "Select", new { id = item.ProjetId })
+        </td>
+    </tr>
+    }
+
+</table>

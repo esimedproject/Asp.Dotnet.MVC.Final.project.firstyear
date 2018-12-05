@@ -1,0 +1,52 @@
+﻿@model WebApplication.Esimed.Projet.Service.TableTache
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Détails</h2>
+
+<div>
+    <h4>Table des Tâches</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tache  :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TacheNom)
+        </dd>
+
+        <dt>
+            Tâche Début  :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TacheDebutReel)
+        </dd>
+
+
+        <dt>
+            Tâche Fin  :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TacheFinReel)
+        </dd>
+
+
+        <dt>
+            Nombres de Jours  :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TacheNbDeJours) jours
+        </dd>     
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TacheId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

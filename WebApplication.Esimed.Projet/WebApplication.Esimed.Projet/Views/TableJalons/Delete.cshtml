@@ -1,0 +1,56 @@
+﻿@model WebApplication.Esimed.Projet.Service.TableJalon
+
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>Supprimer le Jalon</h2>
+
+<h3>êtes  vous certain de vouloir supprimer votre Projet?</h3>
+<div>
+    <h4>Table des Jalons</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Avancement :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JalonAvancement)
+        </dd>
+
+        <dt>
+            Date de Début :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JalonDateDebut)
+        </dd>
+
+        <dt>
+            Date de Fin :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JalonDateFin)
+        </dd>
+
+        <dt>
+            Nom du Jalon :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JalonNom)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste", "Index")
+        </div>
+    }
+</div>

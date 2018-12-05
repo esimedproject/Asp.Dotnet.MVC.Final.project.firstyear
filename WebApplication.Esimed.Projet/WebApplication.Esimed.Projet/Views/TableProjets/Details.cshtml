@@ -1,0 +1,42 @@
+﻿@model WebApplication.Esimed.Projet.Service.TableProjet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TableProjet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           projet :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjetNom)
+        </dd>
+
+        <dt>
+            Avancement :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjetAvancement) %
+        </dd>
+        
+        <dt>
+            Propriétaire :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TableTrigramme.TrigrammeNom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.ProjetId }) |
+    @Html.ActionLink("Retour à la liste", "Index")
+</p>
