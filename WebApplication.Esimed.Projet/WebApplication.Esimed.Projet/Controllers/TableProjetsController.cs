@@ -14,7 +14,7 @@ namespace WebApplication.Esimed.Projet.Controllers
 {
     public class TableProjetsController : Controller
     {
-        private DaEntities db = new DaEntities();
+        private EntitiesFrameworkDatabase db = new EntitiesFrameworkDatabase();
 
         // GET: TableProjets
         public ActionResult Index()
@@ -145,6 +145,26 @@ namespace WebApplication.Esimed.Projet.Controllers
             return RedirectToAction("Index", "TableJalons", new { id = id});            
         }
 
+        public ActionResult CreateUser()
+        {
+            ViewBag.ProjetJalon = new SelectList(db.TableJalon, "JalonId", "JalonNom");
+            ViewBag.ProjetTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom");
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateUser([Bind(Include = "ProjetId,ProjetAvancement,ProjetTrigramme,ProjetJalon,ProjetNom")] TableTrigramme tableTrigramme)
+        {
+            if (ModelState.IsValid)
+            {
+                db.TableTrigramme.Add(tableTrigramme);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ProjetJalon = new SelectList(db.TableJalon, "JalonId", "JalonNom");
+            ViewBag.ProjetTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom");
+            return View(tableTrigramme);
+        }
     }
 }

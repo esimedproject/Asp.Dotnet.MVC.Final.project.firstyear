@@ -12,7 +12,7 @@ namespace WebApplication.Esimed.Projet.Controllers
 {
     public class TableJalonsController : Controller
     {
-        private DaEntities db = new DaEntities();
+        private EntitiesFrameworkDatabase db = new EntitiesFrameworkDatabase();
 
         // GET: TableJalons
         public ActionResult IndexAll()
@@ -23,10 +23,10 @@ namespace WebApplication.Esimed.Projet.Controllers
         
         public ActionResult Index(int id)
         {
-            var tableJalon = db.TableJalon.Include(t => t.TableTache).Include(t => t.TableTrigramme);
-            var maliste = tableJalon.ToList().Where(t => t.JalonId == id);
-            ViewBag.idprojet = id;
-            return View(maliste);
+            var tableJalon = db.TableJalon.Include(t => t.TableTache).Include(t => t.TableTrigramme); 
+            var maliste = tableJalon.Where(t => t.IdProjet == id).ToList();
+            ViewBag.idprojet = id;     
+            return View(maliste); 
         }
 
         // GET: TableJalons/Details/5

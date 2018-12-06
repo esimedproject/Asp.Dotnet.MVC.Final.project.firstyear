@@ -13,10 +13,10 @@ namespace WebApplication.Esimed.Projet.Service
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DaEntities : DbContext
+    public partial class EntitiesFrameworkDatabase : DbContext
     {
-        public DaEntities()
-            : base("name=DaEntities")
+        public EntitiesFrameworkDatabase()
+            : base("name=EntitiesFrameworkDatabase")
         {
         }
     
@@ -29,7 +29,6 @@ namespace WebApplication.Esimed.Projet.Service
         public virtual DbSet<TableJalon> TableJalon { get; set; }
         public virtual DbSet<TableProjet> TableProjet { get; set; }
         public virtual DbSet<TableTache> TableTache { get; set; }
-        public virtual DbSet<TableTacheExigence> TableTacheExigence { get; set; }
         public virtual DbSet<TableTrigramme> TableTrigramme { get; set; }
     }
 }

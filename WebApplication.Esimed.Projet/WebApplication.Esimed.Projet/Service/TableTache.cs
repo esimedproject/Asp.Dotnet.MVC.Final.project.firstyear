@@ -14,16 +14,23 @@ namespace WebApplication.Esimed.Projet.Service
     
     public partial class TableTache
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TableTache()
+        {
+            this.TableExigence = new HashSet<TableExigence>();
+        }
+    
         public int TacheId { get; set; }
         public string TacheNom { get; set; }
         public Nullable<int> TacheTrigramme { get; set; }
         public Nullable<System.DateTime> TacheFinReel { get; set; }
         public Nullable<System.DateTime> TacheDebutReel { get; set; }
         public int TacheNbDeJours { get; set; }
-        public Nullable<int> TacheExigence { get; set; }
+        public int TacheExigence { get; set; }
         public Nullable<int> IdJalon { get; set; }
     
         public virtual TableJalon TableJalon { get; set; }
-        public virtual TableTacheExigence TableTacheExigence { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TableExigence> TableExigence { get; set; }
     }
 }

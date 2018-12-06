@@ -155,7 +155,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TableExigencesController.cs" />
     <Compile Include="Controllers\TableJalonsController.cs" />
     <Compile Include="Controllers\TableProjetsController.cs" />
     <Compile Include="Controllers\TableTachesController.cs" />
@@ -163,38 +163,35 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\Data.Context.cs">
+    <Compile Include="Service\Database.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Data.Context.tt</DependentUpon>
+      <DependentUpon>Database.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Service\Data.cs">
+    <Compile Include="Service\Database.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Data.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Service\Data.Designer.cs">
+    <Compile Include="Service\Database.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Data.edmx</DependentUpon>
+      <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
     <Compile Include="Service\TableExigence.cs">
-      <DependentUpon>Data.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\TableJalon.cs">
-      <DependentUpon>Data.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\TableProjet.cs">
-      <DependentUpon>Data.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\TableTache.cs">
-      <DependentUpon>Data.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Service\TableTacheExigence.cs">
-      <DependentUpon>Data.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\TableTrigramme.cs">
-      <DependentUpon>Data.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -226,15 +223,15 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Service\Data.Context.tt">
+    <Content Include="Service\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Data.edmx</DependentUpon>
-      <LastGenOutput>Data.Context.cs</LastGenOutput>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Service\Data.tt">
+    <Content Include="Service\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Data.edmx</DependentUpon>
-      <LastGenOutput>Data.cs</LastGenOutput>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -262,13 +259,18 @@
     <Content Include="Views\TableJalons\Details.cshtml" />
     <Content Include="Views\TableJalons\Edit.cshtml" />
     <Content Include="Views\TableJalons\Index.cshtml" />
-    <EntityDeploy Include="Service\Data.edmx">
+    <EntityDeploy Include="Service\Database.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Data.Designer.cs</LastGenOutput>
+      <LastGenOutput>Database.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Service\Data.edmx.diagram">
-      <DependentUpon>Data.edmx</DependentUpon>
+    <Content Include="Service\Database.edmx.diagram">
+      <DependentUpon>Database.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\TableExigences\Create.cshtml" />
+    <Content Include="Views\TableExigences\Delete.cshtml" />
+    <Content Include="Views\TableExigences\Edit.cshtml" />
+    <Content Include="Views\TableExigences\Index.cshtml" />
+    <Content Include="Views\TableProjets\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,7 +17,7 @@ namespace WebApplication.Esimed.Projet.Service
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TableExigence()
         {
-            this.TableTacheExigence = new HashSet<TableTacheExigence>();
+            this.TableTache = new HashSet<TableTache>();
         }
     
         public int ExigenceId { get; set; }
@@ -26,6 +26,6 @@ namespace WebApplication.Esimed.Projet.Service
         public string ExigenceFonctionTache { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TableTacheExigence> TableTacheExigence { get; set; }
+        public virtual ICollection<TableTache> TableTache { get; set; }
     }
 }

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<WebApplication.Esimed.Projet.Service.TableJalon>
-
+﻿
+@model IEnumerable<WebApplication.Esimed.Projet.Service.TableJalon>
 @{
     ViewBag.Title = "Index";
 }
 
-<h4>Table des Jalons</h4>
+<h2>Table des Jalons</h2>
 
 <button class="btn btn-default">
     @Html.ActionLink("Créer un Jalon", "Create", new { idprojet = ViewBag.idprojet })

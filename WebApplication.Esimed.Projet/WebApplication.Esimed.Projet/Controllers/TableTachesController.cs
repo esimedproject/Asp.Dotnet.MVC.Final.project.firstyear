@@ -12,7 +12,7 @@ namespace WebApplication.Esimed.Projet.Controllers
 {
     public class TableTachesController : Controller
     {
-        private DaEntities db = new DaEntities();
+        private EntitiesFrameworkDatabase db = new EntitiesFrameworkDatabase();
 
         // GET: TableTaches
         public ActionResult IndexAll()
@@ -23,8 +23,8 @@ namespace WebApplication.Esimed.Projet.Controllers
 
         public ActionResult Index(int id)
         {
-            var tableTaches = db.TableTache.Include(t => t.TableJalon);
-            var maliste = tableTaches.ToList().Where(t => t.TacheId == id);
+            var tableTaches = db.TableTache.Include(t => t.TableJalon).Include(t => t.TableExigence);
+            var maliste = tableTaches.Where(t => t.IdJalon == id).ToList();
             ViewBag.idtaches = id;
             return View(maliste);
         }
@@ -47,7 +47,7 @@ namespace WebApplication.Esimed.Projet.Controllers
         // GET: TableTaches/Create
         public ActionResult Create(int idtaches)
         {
-            //ViewBag.IdJalon = new SelectList(db.TableTache, "TacheId", "TacheNom");
+            ViewBag.IdJalon = new SelectList(db.TableTache, "TacheId", "TacheNom");
             ViewBag.TacheTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom");
             ViewBag.IdJalon = idtaches;
             return View();
@@ -66,7 +66,7 @@ namespace WebApplication.Esimed.Projet.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", new { id = tableTache.IdJalon });
             }
-            //ViewBag.IdJalon = new SelectList(db.TableTache, "TacheId", "TacheNom", tableTache.IdJalon);
+            ViewBag.IdJalon = new SelectList(db.TableTache, "TacheId", "TacheNom", tableTache.IdJalon);
             ViewBag.TacheTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom", tableTache.TacheTrigramme);
             return View(tableTache);
         }
