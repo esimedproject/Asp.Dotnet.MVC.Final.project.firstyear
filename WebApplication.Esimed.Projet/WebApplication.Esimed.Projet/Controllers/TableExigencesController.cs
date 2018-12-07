@@ -12,7 +12,7 @@ namespace WebApplication.Esimed.Projet.Controllers
 {
     public class TableExigencesController : Controller
     {
-        private EntitiesDA db = new EntitiesDA();
+        private EntitiesFrameworkData db = new EntitiesFrameworkData();
 
         // GET: TableExigences
         public ActionResult IndexAll()

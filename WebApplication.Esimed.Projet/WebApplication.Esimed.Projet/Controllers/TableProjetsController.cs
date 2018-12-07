@@ -14,7 +14,7 @@ namespace WebApplication.Esimed.Projet.Controllers
 {
     public class TableProjetsController : Controller
     {
-        private EntitiesDA db = new EntitiesDA();
+        private EntitiesFrameworkData db = new EntitiesFrameworkData();
 
         // GET: TableProjets
         public ActionResult Index()

@@ -13,10 +13,10 @@ namespace WebApplication.Esimed.Projet.Service
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EntitiesDA : DbContext
+    public partial class EntitiesFrameworkData : DbContext
     {
-        public EntitiesDA()
-            : base("name=EntitiesDA")
+        public EntitiesFrameworkData()
+            : base("name=EntitiesFrameworkData")
         {
         }
     
