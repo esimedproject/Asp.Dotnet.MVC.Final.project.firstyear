@@ -26,7 +26,7 @@ namespace WebApplication.Esimed.Projet.Service
         public Nullable<System.DateTime> JalonDateDebut { get; set; }
         public Nullable<System.DateTime> JalonDateFin { get; set; }
         public string JalonNom { get; set; }
-        public Nullable<int> IdProjet { get; set; }
+        public int IdProjet { get; set; }
     
         public virtual TableProjet TableProjet { get; set; }
         public virtual TableTrigramme TableTrigramme { get; set; }

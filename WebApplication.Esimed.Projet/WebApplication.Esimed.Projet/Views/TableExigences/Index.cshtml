@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<WebApplication.Esimed.Projet.Service.TableExigence>
-
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Exigences</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<button class="btn btn-default">
+    @Html.ActionLink("Créer une exigence", "Create", new { idprojet = ViewBag.IdProjet })
+</button>
+<INPUT TYPE="button"
+       VALUE="Retour"
+       onClick="history.back()"
+       class="btn btn-default">
 <table class="table">
-    <tr>s
+    <tr>
         <th>
             Commentaire 
         </th>
@@ -18,7 +21,7 @@
             Fonctionnement
         </th>
         <th>
-            Tache
+            Tâche
         </th>
         <th></th>
     </tr>

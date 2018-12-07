@@ -27,7 +27,7 @@ namespace WebApplication.Esimed.Projet.Service
         public Nullable<System.DateTime> TacheDebutReel { get; set; }
         public int TacheNbDeJours { get; set; }
         public int TacheExigence { get; set; }
-        public Nullable<int> IdJalon { get; set; }
+        public int IdJalon { get; set; }
     
         public virtual TableJalon TableJalon { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

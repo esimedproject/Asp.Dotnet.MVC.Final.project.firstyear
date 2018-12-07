@@ -7,6 +7,7 @@
 
 <h3>êtes  vous certain de vouloir supprimer votre Projet?</h3>
 <div>
+   
     <h4>Table des Jalons</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -15,6 +16,9 @@
         </dt>
 
         <dd>
+            <div class="col-md-2">
+                @Html.HiddenFor(model => model.IdProjet, new { Value = ViewBag.IdProjet })
+            </div>
             @Html.DisplayFor(model => model.JalonAvancement)
         </dd>
 
@@ -49,8 +53,11 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Supprimer" class="btn btn-default" /> |
-            @Html.ActionLink("Retour à la liste", "Index")
+            <input type="submit" value="Supprimer" class="btn btn-default" /> 
+            <INPUT TYPE="button"
+                   VALUE="Retour à liste"
+                   onClick="history.back()"
+                   class="btn btn-default">
         </div>
     }
 </div>

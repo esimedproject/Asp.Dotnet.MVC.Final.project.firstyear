@@ -12,17 +12,26 @@ namespace WebApplication.Esimed.Projet.Controllers
 {
     public class TableExigencesController : Controller
     {
-        private EntitiesFrameworkDatabase db = new EntitiesFrameworkDatabase();
+        private EntitiesDA db = new EntitiesDA();
 
         // GET: TableExigences
-        public ActionResult Index()
+        public ActionResult IndexAll()
         {
             return View(db.TableExigence.ToList());
         }
-        
-        // GET: TableExigences/Create
-        public ActionResult Create()
+
+        public ActionResult Index(int id)
         {
+            var tableExigence = db.TableExigence.Include(t => t.TableProjet).Include(t => t.TableTache);
+            var maliste = tableExigence.Where(t => t.IdProjet == id).ToList();
+            ViewBag.idprojet = id;
+            return View(maliste);
+        }
+        // GET: TableExigences/Create
+        public ActionResult Create(int idprojet)
+        {
+            ViewBag.IdProjet = new SelectList(db.TableExigence,"ExigenceCommentaire", "ExigenceFonctionnel", "ExigenceFonctionTache");
+            ViewBag.IdProjet = idprojet;
             return View();
         }
 
@@ -37,9 +46,9 @@ namespace WebApplication.Esimed.Projet.Controllers
             {
                 db.TableExigence.Add(tableExigence);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = tableExigence.IdProjet});
             }
-
+            ViewBag.IdProjet = new SelectList(db.TableExigence, "ExigenceCommentaire", "ExigenceFonctionnel", "ExigenceFonctionTache");
             return View(tableExigence);
         }
 

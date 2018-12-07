@@ -12,7 +12,8 @@
           <Property Name="ExigenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ExigenceCommentaire" Type="nvarchar" MaxLength="300" />
           <Property Name="ExigenceFonctionnel" Type="bit" Nullable="false" />
-          <Property Name="ExigenceFonctionTache" Type="nchar" MaxLength="10" />
+          <Property Name="ExigenceFonctionTache" Type="nchar" MaxLength="30" />
+          <Property Name="IdProjet" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TableJalon">
           <Key>
@@ -24,7 +25,7 @@
           <Property Name="JalonDateDebut" Type="datetime" />
           <Property Name="JalonDateFin" Type="datetime" />
           <Property Name="JalonNom" Type="nvarchar" MaxLength="50" />
-          <Property Name="IdProjet" Type="int" />
+          <Property Name="IdProjet" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TableProjet">
           <Key>
@@ -32,7 +33,7 @@
           </Key>
           <Property Name="ProjetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProjetAvancement" Type="int" />
-          <Property Name="ProjetTrigramme" Type="int" />
+          <Property Name="ProjetTrigramme" Type="int" Nullable="false" />
           <Property Name="ProjetNom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TableTache">
@@ -46,7 +47,7 @@
           <Property Name="TacheDebutReel" Type="datetime" />
           <Property Name="TacheNbDeJours" Type="int" Nullable="false" />
           <Property Name="TacheExigence" Type="int" Nullable="false" />
-          <Property Name="IdJalon" Type="int" />
+          <Property Name="IdJalon" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TableTacheExigence">
           <Key>
@@ -61,10 +62,24 @@
             <PropertyRef Name="TrigrammeId" />
           </Key>
           <Property Name="TrigrammeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TrigrammeNom" Type="nchar" MaxLength="3" />
+          <Property Name="TrigrammeNom" Type="nvarchar" MaxLength="3" Nullable="false" />
         </EntityType>
+        <Association Name="FK_TableExigence_TableProjet">
+          <End Role="TableProjet" Type="Self.TableProjet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TableExigence" Type="Self.TableExigence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableProjet">
+              <PropertyRef Name="ProjetId" />
+            </Principal>
+            <Dependent Role="TableExigence">
+              <PropertyRef Name="IdProjet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TableJalon_TableProjet">
-          <End Role="TableProjet" Type="Self.TableProjet" Multiplicity="0..1">
+          <End Role="TableProjet" Type="Self.TableProjet" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="TableJalon" Type="Self.TableJalon" Multiplicity="*" />
@@ -90,7 +105,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TableProjet_TableTrigramme">
-          <End Role="TableTrigramme" Type="Self.TableTrigramme" Multiplicity="0..1" />
+          <End Role="TableTrigramme" Type="Self.TableTrigramme" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TableProjet" Type="Self.TableProjet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TableTrigramme">
@@ -102,7 +119,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TableTache_TableJalon">
-          <End Role="TableJalon" Type="Self.TableJalon" Multiplicity="0..1">
+          <End Role="TableJalon" Type="Self.TableJalon" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="TableTache" Type="Self.TableTache" Multiplicity="*" />
@@ -146,6 +163,10 @@
           <EntitySet Name="TableTache" EntityType="Self.TableTache" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TableTacheExigence" EntityType="Self.TableTacheExigence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TableTrigramme" EntityType="Self.TableTrigramme" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TableExigence_TableProjet" Association="Self.FK_TableExigence_TableProjet">
+            <End Role="TableProjet" EntitySet="TableProjet" />
+            <End Role="TableExigence" EntitySet="TableExigence" />
+          </AssociationSet>
           <AssociationSet Name="FK_TableJalon_TableProjet" Association="Self.FK_TableJalon_TableProjet">
             <End Role="TableProjet" EntitySet="TableProjet" />
             <End Role="TableJalon" EntitySet="TableJalon" />
@@ -183,7 +204,9 @@
           <Property Name="ExigenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ExigenceCommentaire" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="ExigenceFonctionnel" Type="Boolean" Nullable="false" />
-          <Property Name="ExigenceFonctionTache" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ExigenceFonctionTache" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="IdProjet" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TableProjet" Relationship="Self.FK_TableExigence_TableProjet" FromRole="TableExigence" ToRole="TableProjet" />
           <NavigationProperty Name="TableTache" Relationship="Self.TableTacheExigence" FromRole="TableExigence" ToRole="TableTache" />
         </EntityType>
         <EntityType Name="TableJalon">
@@ -196,7 +219,7 @@
           <Property Name="JalonDateDebut" Type="DateTime" Precision="3" />
           <Property Name="JalonDateFin" Type="DateTime" Precision="3" />
           <Property Name="JalonNom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdProjet" Type="Int32" />
+          <Property Name="IdProjet" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TableProjet" Relationship="Self.FK_TableJalon_TableProjet" FromRole="TableJalon" ToRole="TableProjet" />
           <NavigationProperty Name="TableTrigramme" Relationship="Self.FK_TableJalon_TableTrigramme" FromRole="TableJalon" ToRole="TableTrigramme" />
           <NavigationProperty Name="TableTache" Relationship="Self.FK_TableTache_TableJalon" FromRole="TableJalon" ToRole="TableTache" />
@@ -207,8 +230,9 @@
           </Key>
           <Property Name="ProjetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProjetAvancement" Type="Int32" />
-          <Property Name="ProjetTrigramme" Type="Int32" />
+          <Property Name="ProjetTrigramme" Type="Int32" Nullable="false" />
           <Property Name="ProjetNom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TableExigence" Relationship="Self.FK_TableExigence_TableProjet" FromRole="TableProjet" ToRole="TableExigence" />
           <NavigationProperty Name="TableJalon" Relationship="Self.FK_TableJalon_TableProjet" FromRole="TableProjet" ToRole="TableJalon" />
           <NavigationProperty Name="TableTrigramme" Relationship="Self.FK_TableProjet_TableTrigramme" FromRole="TableProjet" ToRole="TableTrigramme" />
         </EntityType>
@@ -223,7 +247,7 @@
           <Property Name="TacheDebutReel" Type="DateTime" Precision="3" />
           <Property Name="TacheNbDeJours" Type="Int32" Nullable="false" />
           <Property Name="TacheExigence" Type="Int32" Nullable="false" />
-          <Property Name="IdJalon" Type="Int32" />
+          <Property Name="IdJalon" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TableJalon" Relationship="Self.FK_TableTache_TableJalon" FromRole="TableTache" ToRole="TableJalon" />
           <NavigationProperty Name="TableExigence" Relationship="Self.TableTacheExigence" FromRole="TableTache" ToRole="TableExigence" />
         </EntityType>
@@ -232,12 +256,26 @@
             <PropertyRef Name="TrigrammeId" />
           </Key>
           <Property Name="TrigrammeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TrigrammeNom" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="TrigrammeNom" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="TableJalon" Relationship="Self.FK_TableJalon_TableTrigramme" FromRole="TableTrigramme" ToRole="TableJalon" />
           <NavigationProperty Name="TableProjet" Relationship="Self.FK_TableProjet_TableTrigramme" FromRole="TableTrigramme" ToRole="TableProjet" />
         </EntityType>
+        <Association Name="FK_TableExigence_TableProjet">
+          <End Role="TableProjet" Type="Self.TableProjet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TableExigence" Type="Self.TableExigence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableProjet">
+              <PropertyRef Name="ProjetId" />
+            </Principal>
+            <Dependent Role="TableExigence">
+              <PropertyRef Name="IdProjet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TableJalon_TableProjet">
-          <End Role="TableProjet" Type="Self.TableProjet" Multiplicity="0..1">
+          <End Role="TableProjet" Type="Self.TableProjet" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="TableJalon" Type="Self.TableJalon" Multiplicity="*" />
@@ -263,7 +301,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TableTache_TableJalon">
-          <End Role="TableJalon" Type="Self.TableJalon" Multiplicity="0..1">
+          <End Role="TableJalon" Type="Self.TableJalon" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="TableTache" Type="Self.TableTache" Multiplicity="*" />
@@ -277,7 +315,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TableProjet_TableTrigramme">
-          <End Role="TableTrigramme" Type="Self.TableTrigramme" Multiplicity="0..1" />
+          <End Role="TableTrigramme" Type="Self.TableTrigramme" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TableProjet" Type="Self.TableProjet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TableTrigramme">
@@ -292,12 +332,16 @@
           <End Role="TableExigence" Type="Self.TableExigence" Multiplicity="*" />
           <End Role="TableTache" Type="Self.TableTache" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="EntitiesFrameworkDatabase" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EntitiesDA" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TableExigence" EntityType="Self.TableExigence" />
           <EntitySet Name="TableJalon" EntityType="Self.TableJalon" />
           <EntitySet Name="TableProjet" EntityType="Self.TableProjet" />
           <EntitySet Name="TableTache" EntityType="Self.TableTache" />
           <EntitySet Name="TableTrigramme" EntityType="Self.TableTrigramme" />
+          <AssociationSet Name="FK_TableExigence_TableProjet" Association="Self.FK_TableExigence_TableProjet">
+            <End Role="TableProjet" EntitySet="TableProjet" />
+            <End Role="TableExigence" EntitySet="TableExigence" />
+          </AssociationSet>
           <AssociationSet Name="FK_TableJalon_TableProjet" Association="Self.FK_TableJalon_TableProjet">
             <End Role="TableProjet" EntitySet="TableProjet" />
             <End Role="TableJalon" EntitySet="TableJalon" />
@@ -324,7 +368,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DatabaseProjetDotnetModelStoreContainer" CdmEntityContainer="EntitiesFrameworkDatabase">
+        <EntityContainerMapping StorageEntityContainer="DatabaseProjetDotnetModelStoreContainer" CdmEntityContainer="EntitiesDA">
           <EntitySetMapping Name="TableExigence">
             <EntityTypeMapping TypeName="Database.Projet.DotnetModel.TableExigence">
               <MappingFragment StoreEntitySet="TableExigence">
@@ -332,6 +376,7 @@
                 <ScalarProperty Name="ExigenceCommentaire" ColumnName="ExigenceCommentaire" />
                 <ScalarProperty Name="ExigenceFonctionnel" ColumnName="ExigenceFonctionnel" />
                 <ScalarProperty Name="ExigenceFonctionTache" ColumnName="ExigenceFonctionTache" />
+                <ScalarProperty Name="IdProjet" ColumnName="IdProjet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

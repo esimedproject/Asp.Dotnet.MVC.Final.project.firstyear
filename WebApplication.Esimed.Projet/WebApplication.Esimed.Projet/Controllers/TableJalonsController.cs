@@ -12,7 +12,7 @@ namespace WebApplication.Esimed.Projet.Controllers
 {
     public class TableJalonsController : Controller
     {
-        private EntitiesFrameworkDatabase db = new EntitiesFrameworkDatabase();
+        private EntitiesDA db = new EntitiesDA();
 
         // GET: TableJalons
         public ActionResult IndexAll()
@@ -29,27 +29,12 @@ namespace WebApplication.Esimed.Projet.Controllers
             return View(maliste); 
         }
 
-        // GET: TableJalons/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TableJalon tableJalon = db.TableJalon.Find(id);
-            if (tableJalon == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tableJalon);
-        }
-
         // GET: TableJalons/Create
-        public ActionResult Create(int idprojet)
+        public ActionResult Create(int id)
         {
             ViewBag.IdProjet = new SelectList(db.TableProjet, "ProjetId", "ProjetNom");
             ViewBag.JalonTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom");
-            ViewBag.IdProjet = idprojet;
+            ViewBag.IdProjet = id;
             return View();
         }
 
@@ -66,20 +51,21 @@ namespace WebApplication.Esimed.Projet.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", new { id = tableJalon.IdProjet });
             }
-
             ViewBag.IdProjet = new SelectList(db.TableProjet, "ProjetId", "ProjetNom", tableJalon.IdProjet);
+           // ViewBag.IdJalon = new SelectList(db.TableTache, "TacheId", "TacheNom", tableJalon.Id);
             ViewBag.JalonTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom", tableJalon.JalonTrigramme);
             return View(tableJalon);
         }
 
         // GET: TableJalons/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? idpage)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TableJalon tableJalon = db.TableJalon.Find(id);
+            ViewBag.IdProjet = id;
             if (tableJalon == null)
             {
                 return HttpNotFound();
@@ -94,13 +80,13 @@ namespace WebApplication.Esimed.Projet.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "JalonId,JalonTrigramme,JalonAvancement,JalonDateDebut,JalonDateFin,JalonNom,IdProjet")] TableJalon tableJalon)
+        public ActionResult Edit(TableJalon tableJalon)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(tableJalon).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { id = tableJalon.IdProjet });
             }
             ViewBag.IdProjet = new SelectList(db.TableProjet, "ProjetId", "ProjetNom", tableJalon.IdProjet);
             ViewBag.JalonTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom", tableJalon.JalonTrigramme);
@@ -115,6 +101,7 @@ namespace WebApplication.Esimed.Projet.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TableJalon tableJalon = db.TableJalon.Find(id);
+            
             if (tableJalon == null)
             {
                 return HttpNotFound();
@@ -150,6 +137,17 @@ namespace WebApplication.Esimed.Projet.Controllers
             }
             var tableTache = db.TableTache;
             return RedirectToAction("Index", "TableTaches", new {id = id});
+        }
+        
+        public ActionResult Redirect(int? idprojet)
+        {
+            ViewBag.IdProjet = idprojet;
+            if (idprojet == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var tableTache = db.TableTache;
+            return RedirectToAction("Index", "TableJalons", new { id = idprojet });
         }
     }
 }

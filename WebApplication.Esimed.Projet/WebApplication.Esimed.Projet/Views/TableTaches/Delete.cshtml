@@ -50,7 +50,10 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Supprimer" class="btn btn-default" /> |
-            @Html.ActionLink("Retour à la liste", "Index")
+            <INPUT TYPE="button"
+                   VALUE="Retour à liste"
+                   onClick="history.back()"
+                   class="btn btn-default">
         </div>
     }
 </div>

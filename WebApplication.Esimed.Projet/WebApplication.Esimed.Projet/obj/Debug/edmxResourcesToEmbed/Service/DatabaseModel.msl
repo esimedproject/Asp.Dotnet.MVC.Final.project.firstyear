@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseProjetDotnetModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="TableExigence">
+      <EntityTypeMapping TypeName="Database.Projet.DotnetModel.TableExigence">
+        <MappingFragment StoreEntitySet="TableExigence">
+          <ScalarProperty Name="ExigenceId" ColumnName="ExigenceId" />
+          <ScalarProperty Name="ExigenceCommentaire" ColumnName="ExigenceCommentaire" />
+          <ScalarProperty Name="ExigenceFonctionnel" ColumnName="ExigenceFonctionnel" />
+          <ScalarProperty Name="ExigenceFonctionTache" ColumnName="ExigenceFonctionTache" />
+          <ScalarProperty Name="IdProjet" ColumnName="IdProjet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TableJalon">
+      <EntityTypeMapping TypeName="Database.Projet.DotnetModel.TableJalon">
+        <MappingFragment StoreEntitySet="TableJalon">
+          <ScalarProperty Name="JalonId" ColumnName="JalonId" />
+          <ScalarProperty Name="JalonTrigramme" ColumnName="JalonTrigramme" />
+          <ScalarProperty Name="JalonAvancement" ColumnName="JalonAvancement" />
+          <ScalarProperty Name="JalonDateDebut" ColumnName="JalonDateDebut" />
+          <ScalarProperty Name="JalonDateFin" ColumnName="JalonDateFin" />
+          <ScalarProperty Name="JalonNom" ColumnName="JalonNom" />
+          <ScalarProperty Name="IdProjet" ColumnName="IdProjet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TableProjet">
+      <EntityTypeMapping TypeName="Database.Projet.DotnetModel.TableProjet">
+        <MappingFragment StoreEntitySet="TableProjet">
+          <ScalarProperty Name="ProjetId" ColumnName="ProjetId" />
+          <ScalarProperty Name="ProjetAvancement" ColumnName="ProjetAvancement" />
+          <ScalarProperty Name="ProjetTrigramme" ColumnName="ProjetTrigramme" />
+          <ScalarProperty Name="ProjetNom" ColumnName="ProjetNom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TableTache">
+      <EntityTypeMapping TypeName="Database.Projet.DotnetModel.TableTache">
+        <MappingFragment StoreEntitySet="TableTache">
+          <ScalarProperty Name="TacheId" ColumnName="TacheId" />
+          <ScalarProperty Name="TacheNom" ColumnName="TacheNom" />
+          <ScalarProperty Name="TacheTrigramme" ColumnName="TacheTrigramme" />
+          <ScalarProperty Name="TacheFinReel" ColumnName="TacheFinReel" />
+          <ScalarProperty Name="TacheDebutReel" ColumnName="TacheDebutReel" />
+          <ScalarProperty Name="TacheNbDeJours" ColumnName="TacheNbDeJours" />
+          <ScalarProperty Name="TacheExigence" ColumnName="TacheExigence" />
+          <ScalarProperty Name="IdJalon" ColumnName="IdJalon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TableTrigramme">
+      <EntityTypeMapping TypeName="Database.Projet.DotnetModel.TableTrigramme">
+        <MappingFragment StoreEntitySet="TableTrigramme">
+          <ScalarProperty Name="TrigrammeId" ColumnName="TrigrammeId" />
+          <ScalarProperty Name="TrigrammeNom" ColumnName="TrigrammeNom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TableTacheExigence" TypeName="Database.Projet.DotnetModel.TableTacheExigence" StoreEntitySet="TableTacheExigence">
+      <EndProperty Name="TableExigence">
+        <ScalarProperty Name="ExigenceId" ColumnName="TETache" />
+      </EndProperty>
+      <EndProperty Name="TableTache">
+        <ScalarProperty Name="TacheId" ColumnName="TEExigence" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

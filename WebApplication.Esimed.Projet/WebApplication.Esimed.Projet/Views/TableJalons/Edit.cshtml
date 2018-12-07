@@ -10,49 +10,53 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Table des Jalons</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.JalonId)
+<div class="form-horizontal">
+    <h4>Table des Jalons</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.JalonId)
 
-        <div class="form-group">
-            <div class="control-label col-md-2">
-                Jalon :
-            </div>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.JalonNom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.JalonNom, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <div class="control-label col-md-2">
+            Jalon :
         </div>
-        <div class="form-group">
-            <div class="control-label col-md-2">
-                Date de Debut :
-            </div>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.JalonDateDebut, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-                @Html.ValidationMessageFor(model => model.JalonDateDebut, "", new { @class = "text-danger" })
-            </div>
+        <div class="col-md-2">
+            @Html.HiddenFor(model => model.IdProjet, new { Value = ViewBag.IdProjet })
         </div>
-
-        <div class="form-group">
-            <div class="control-label col-md-2">
-                Date de Fin :
-            </div>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.JalonDateFin, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-                @Html.ValidationMessageFor(model => model.JalonDateFin, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Sauvegarder" class="btn btn-default" />
-            </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.JalonNom, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.JalonNom, "", new { @class = "text-danger" })
         </div>
     </div>
-}
+    <div class="form-group">
+        <div class="control-label col-md-2">
+            Date de Debut :
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.JalonDateDebut, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+            @Html.ValidationMessageFor(model => model.JalonDateDebut, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-<div>
-    @Html.ActionLink("Retour à la liste", "Index")
+    <div class="form-group">
+        <div class="control-label col-md-2">
+            Date de Fin :
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.JalonDateFin, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+            @Html.ValidationMessageFor(model => model.JalonDateFin, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Sauvegarder" class="btn btn-default" />
+        </div>
+    </div>
 </div>
+}
+<INPUT TYPE="button"
+       VALUE="Retour à liste"
+       onClick="history.back()"
+       class="btn btn-default">
+

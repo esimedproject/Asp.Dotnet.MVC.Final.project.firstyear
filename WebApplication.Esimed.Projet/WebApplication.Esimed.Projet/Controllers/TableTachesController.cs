@@ -12,7 +12,7 @@ namespace WebApplication.Esimed.Projet.Controllers
 {
     public class TableTachesController : Controller
     {
-        private EntitiesFrameworkDatabase db = new EntitiesFrameworkDatabase();
+        private EntitiesDA db = new EntitiesDA();
 
         // GET: TableTaches
         public ActionResult IndexAll()
@@ -25,7 +25,7 @@ namespace WebApplication.Esimed.Projet.Controllers
         {
             var tableTaches = db.TableTache.Include(t => t.TableJalon).Include(t => t.TableExigence);
             var maliste = tableTaches.Where(t => t.IdJalon == id).ToList();
-            ViewBag.idtaches = id;
+            ViewBag.IdJalon = id;
             return View(maliste);
         }
        
@@ -45,11 +45,11 @@ namespace WebApplication.Esimed.Projet.Controllers
         }              
 
         // GET: TableTaches/Create
-        public ActionResult Create(int idtaches)
+        public ActionResult Create(int idJalon)
         {
             ViewBag.IdJalon = new SelectList(db.TableTache, "TacheId", "TacheNom");
             ViewBag.TacheTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom");
-            ViewBag.IdJalon = idtaches;
+            ViewBag.IdJalon = idJalon;
             return View();
         }
 
@@ -92,13 +92,13 @@ namespace WebApplication.Esimed.Projet.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TacheId,TacheNom,TacheTrigramme,TacheFinReel,TacheDebutReel,TacheNbDeJours,TacheExigence")] TableTache tableTache)
+        public ActionResult Edit(TableTache tableTache)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tableTache).State = EntityState.Modified;
+                db.TableTache.Add(tableTache);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = tableTache.IdJalon });
             }
             ViewBag.TacheTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom", tableTache.TacheTrigramme);
             return View(tableTache);
@@ -129,6 +129,15 @@ namespace WebApplication.Esimed.Projet.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult Open(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var tableTache = db.TableTache;
+            return RedirectToAction("Index", "TableExigences", new { id = id });
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -137,6 +146,6 @@ namespace WebApplication.Esimed.Projet.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }     
     }
 }

@@ -24,7 +24,9 @@ namespace WebApplication.Esimed.Projet.Service
         public string ExigenceCommentaire { get; set; }
         public bool ExigenceFonctionnel { get; set; }
         public string ExigenceFonctionTache { get; set; }
+        public int IdProjet { get; set; }
     
+        public virtual TableProjet TableProjet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TableTache> TableTache { get; set; }
     }

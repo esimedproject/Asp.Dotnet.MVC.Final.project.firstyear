@@ -8,9 +8,6 @@
 <button class="btn btn-default">
     @Html.ActionLink("Créer un projet", "Create")    
 </button>
-<button class="btn btn-default">
-    @Html.ActionLink("Créer un utilisateur", "CreateUser")
-</button>
 <table class="table">
     <tr>
         <th>
@@ -39,7 +36,6 @@
         </td>
         <td>
             @Html.ActionLink("Modifier", "Edit", new { id = item.ProjetId }) |
-            @Html.ActionLink("Détails", "Details", new { id = item.ProjetId }) |
             @Html.ActionLink("Supprimer", "Delete", new { id = item.ProjetId }) |
             @Html.ActionLink("Sélectionner", "Select", new { id = item.ProjetId })
         </td>
@@ -47,3 +43,4 @@
     }
 
 </table>
+

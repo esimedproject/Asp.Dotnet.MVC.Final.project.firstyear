@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a997c0be8c184be899dbb2931ef98480" Name="Diagram1">
+        <EntityTypeShape EntityType="Database.Projet.DotnetModel.TableExigence" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.Projet.DotnetModel.TableJalon" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.Projet.DotnetModel.TableProjet" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.Projet.DotnetModel.TableTache" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database.Projet.DotnetModel.TableTrigramme" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="Database.Projet.DotnetModel.FK_TableExigence_TableProjet" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.Projet.DotnetModel.FK_TableJalon_TableProjet" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.Projet.DotnetModel.FK_TableJalon_TableTrigramme" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.Projet.DotnetModel.FK_TableTache_TableJalon" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.Projet.DotnetModel.FK_TableProjet_TableTrigramme" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.Projet.DotnetModel.TableTacheExigence" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

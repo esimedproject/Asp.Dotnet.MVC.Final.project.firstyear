@@ -18,8 +18,7 @@
             <div class="form-group">
                 <div class="control-label col-md-2">
                     Projet :
-                </div>
-              
+                </div>              
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ProjetNom, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ProjetNom, "", new { @class = "text-danger" })
@@ -31,7 +30,8 @@
                 </div>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.TableTrigramme.TrigrammeNom, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TableTrigramme.TrigrammeNom, "", new { @class = "text-danger" })                    
+                    @Html.ValidationMessageFor(model => model.TableTrigramme.TrigrammeNom, "", new { @class = "text-danger" })   
+                    <span style="color:red">@ViewBag.MessageErreur</span>
                 </div>
             </div>
             <div class="form-group">

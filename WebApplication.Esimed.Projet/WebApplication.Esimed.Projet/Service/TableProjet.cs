@@ -17,14 +17,17 @@ namespace WebApplication.Esimed.Projet.Service
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TableProjet()
         {
+            this.TableExigence = new HashSet<TableExigence>();
             this.TableJalon = new HashSet<TableJalon>();
         }
     
         public int ProjetId { get; set; }
         public Nullable<int> ProjetAvancement { get; set; }
-        public Nullable<int> ProjetTrigramme { get; set; }
+        public int ProjetTrigramme { get; set; }
         public string ProjetNom { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TableExigence> TableExigence { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TableJalon> TableJalon { get; set; }
         public virtual TableTrigramme TableTrigramme { get; set; }

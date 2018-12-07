@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<WebApplication.Esimed.Projet.Service.TableJalon>
+﻿@model IEnumerable<WebApplication.Esimed.Projet.Service.TableJalon>
 @{
     ViewBag.Title = "Index";
 }
@@ -7,8 +6,12 @@
 <h2>Table des Jalons</h2>
 
 <button class="btn btn-default">
-    @Html.ActionLink("Créer un Jalon", "Create", new { idprojet = ViewBag.idprojet })
+    @Html.ActionLink("Créer un Jalon", "Create", new { id = ViewBag.IdProjet })
 </button>
+<INPUT TYPE="button"
+       VALUE="Retour"
+       onClick="history.back()"
+       class="btn btn-default">
 <table class="table">
     <tr>
         <th>
@@ -42,8 +45,7 @@
                 @Html.DisplayFor(modelItem => item.JalonDateFin)
             </td>
             <td>
-                @Html.ActionLink("Modifier", "Edit", new { id = item.JalonId }) |
-                @Html.ActionLink("Détails", "Details", new { id = item.JalonId }) |
+                @Html.ActionLink("Modifier", "Edit", new { id = item.JalonId, idpage = ViewBag.IdProjet }) |
                 @Html.ActionLink("Supprimer", "Delete", new { id = item.JalonId }) |
                 @Html.ActionLink("Sélectionner", "Select", new { id = item.JalonId })
             </td>
@@ -51,3 +53,5 @@
     }
 
 </table>
+
+

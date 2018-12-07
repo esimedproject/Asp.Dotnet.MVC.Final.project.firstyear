@@ -8,6 +8,7 @@
           <ScalarProperty Name="ExigenceCommentaire" ColumnName="ExigenceCommentaire" />
           <ScalarProperty Name="ExigenceFonctionnel" ColumnName="ExigenceFonctionnel" />
           <ScalarProperty Name="ExigenceFonctionTache" ColumnName="ExigenceFonctionTache" />
+          <ScalarProperty Name="IdProjet" ColumnName="IdProjet" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -48,14 +49,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TableTacheExigence">
-      <EntityTypeMapping TypeName="Database.Projet.DotnetModel.TableTacheExigence">
-        <MappingFragment StoreEntitySet="TableTacheExigence">
-          <ScalarProperty Name="TETache" ColumnName="TETache" />
-          <ScalarProperty Name="TEExigence" ColumnName="TEExigence" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TableTrigramme">
       <EntityTypeMapping TypeName="Database.Projet.DotnetModel.TableTrigramme">
         <MappingFragment StoreEntitySet="TableTrigramme">
@@ -64,5 +57,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="TableTacheExigence" TypeName="Database.Projet.DotnetModel.TableTacheExigence" StoreEntitySet="TableTacheExigence">
+      <EndProperty Name="TableExigence">
+        <ScalarProperty Name="ExigenceId" ColumnName="TETache" />
+      </EndProperty>
+      <EndProperty Name="TableTache">
+        <ScalarProperty Name="TacheId" ColumnName="TEExigence" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

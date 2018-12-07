@@ -14,28 +14,13 @@ namespace WebApplication.Esimed.Projet.Controllers
 {
     public class TableProjetsController : Controller
     {
-        private EntitiesFrameworkDatabase db = new EntitiesFrameworkDatabase();
+        private EntitiesDA db = new EntitiesDA();
 
         // GET: TableProjets
         public ActionResult Index()
         {
             var tableProjet = db.TableProjet.Include(t => t.TableJalon).Include(t => t.TableTrigramme);
             return View(tableProjet.ToList());
-        }
-
-        // GET: TableProjets/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TableProjet tableProjet = db.TableProjet.Find(id);
-            if (tableProjet == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tableProjet);
         }
 
         // GET: TableProjets/Create
@@ -51,14 +36,14 @@ namespace WebApplication.Esimed.Projet.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjetId,ProjetAvancement,ProjetTrigramme,ProjetJalon,ProjetNom")] TableProjet tableProjet)
-        {
+        public ActionResult Create(TableProjet tableProjet)
+        {       
             if (ModelState.IsValid)
             {
                 db.TableProjet.Add(tableProjet);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            }      
 
             ViewBag.ProjetJalon = new SelectList(db.TableJalon, "JalonId", "JalonNom");
             ViewBag.ProjetTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom", tableProjet.ProjetTrigramme);
@@ -87,8 +72,8 @@ namespace WebApplication.Esimed.Projet.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProjetId,ProjetAvancement,ProjetTrigramme,ProjetJalon,ProjetNom")] TableProjet tableProjet)
-        {
+        public ActionResult Edit(TableProjet tableProjet)
+        {         
             if (ModelState.IsValid)
             {
                 db.Entry(tableProjet).State = EntityState.Modified;
@@ -143,28 +128,7 @@ namespace WebApplication.Esimed.Projet.Controllers
             }
             var tableJalon = db.TableJalon.Include(t => t.TableTache);
             return RedirectToAction("Index", "TableJalons", new { id = id});            
-        }
+        }    
 
-        public ActionResult CreateUser()
-        {
-            ViewBag.ProjetJalon = new SelectList(db.TableJalon, "JalonId", "JalonNom");
-            ViewBag.ProjetTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom");
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateUser([Bind(Include = "ProjetId,ProjetAvancement,ProjetTrigramme,ProjetJalon,ProjetNom")] TableTrigramme tableTrigramme)
-        {
-            if (ModelState.IsValid)
-            {
-                db.TableTrigramme.Add(tableTrigramme);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ProjetJalon = new SelectList(db.TableJalon, "JalonId", "JalonNom");
-            ViewBag.ProjetTrigramme = new SelectList(db.TableTrigramme, "TrigrammeId", "TrigrammeNom");
-            return View(tableTrigramme);
-        }
     }
 }

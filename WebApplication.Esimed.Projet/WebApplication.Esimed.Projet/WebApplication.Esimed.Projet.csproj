@@ -163,35 +163,35 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\Database.Context.cs">
+    <Compile Include="Service\ModelEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.Context.tt</DependentUpon>
+      <DependentUpon>ModelEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Service\Database.cs">
+    <Compile Include="Service\ModelEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ModelEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Service\Database.Designer.cs">
+    <Compile Include="Service\ModelEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.edmx</DependentUpon>
+      <DependentUpon>ModelEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Service\TableExigence.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ModelEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\TableJalon.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ModelEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\TableProjet.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ModelEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\TableTache.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ModelEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\TableTrigramme.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ModelEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -223,15 +223,15 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Service\Database.Context.tt">
+    <Content Include="Service\ModelEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database.edmx</DependentUpon>
-      <LastGenOutput>Database.Context.cs</LastGenOutput>
+      <DependentUpon>ModelEntities.edmx</DependentUpon>
+      <LastGenOutput>ModelEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Service\Database.tt">
+    <Content Include="Service\ModelEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database.edmx</DependentUpon>
-      <LastGenOutput>Database.cs</LastGenOutput>
+      <DependentUpon>ModelEntities.edmx</DependentUpon>
+      <LastGenOutput>ModelEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -246,7 +246,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\TableProjets\Create.cshtml" />
     <Content Include="Views\TableProjets\Delete.cshtml" />
-    <Content Include="Views\TableProjets\Details.cshtml" />
     <Content Include="Views\TableProjets\Edit.cshtml" />
     <Content Include="Views\TableProjets\Index.cshtml" />
     <Content Include="Views\TableTaches\Create.cshtml" />
@@ -256,21 +255,20 @@
     <Content Include="Views\TableTaches\Index.cshtml" />
     <Content Include="Views\TableJalons\Create.cshtml" />
     <Content Include="Views\TableJalons\Delete.cshtml" />
-    <Content Include="Views\TableJalons\Details.cshtml" />
     <Content Include="Views\TableJalons\Edit.cshtml" />
     <Content Include="Views\TableJalons\Index.cshtml" />
-    <EntityDeploy Include="Service\Database.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Database.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Service\Database.edmx.diagram">
-      <DependentUpon>Database.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\TableExigences\Create.cshtml" />
     <Content Include="Views\TableExigences\Delete.cshtml" />
     <Content Include="Views\TableExigences\Edit.cshtml" />
     <Content Include="Views\TableExigences\Index.cshtml" />
     <Content Include="Views\TableProjets\CreateUser.cshtml" />
+    <EntityDeploy Include="Service\ModelEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Service\ModelEntities.edmx.diagram">
+      <DependentUpon>ModelEntities.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
